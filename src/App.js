@@ -1,25 +1,30 @@
-import logo from './logo.svg';
+
 import './App.css';
+import MatchList from './components/MatchList';
+import PlayerList from './components/PlayerList';
+import playerData from './data/playerData';
+import matchData from './data/matchData';
+import { preparePlayerData, addWinsToPlayers } from './helpers/playerHelpers';
+
+
 
 function App() {
+  const playerDataArray = preparePlayerData(playerData)
+  const parsedPlayerData = addWinsToPlayers(playerDataArray, matchData)
+  console.log("app", matchData)
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+      <h1>
+        Tourney Matchs{" "} 
+        <span>Where Coding and Tournaments found their Match!</span>
+      </h1>
+      <PlayerList  parsedPlayerData={parsedPlayerData} />
+      <MatchList matchData={matchData} />
     </div>
   );
 }
+
 
 export default App;
